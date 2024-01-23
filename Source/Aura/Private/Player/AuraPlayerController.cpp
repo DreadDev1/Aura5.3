@@ -9,7 +9,6 @@
 AAuraPlayerController::AAuraPlayerController()
 {
 	bReplicates = true;
-	PrimaryActorTick.bCanEverTick = false;
 }
 
 void AAuraPlayerController::BeginPlay()
