@@ -93,7 +93,19 @@ void UAuraAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallba
 		SetMana(FMath::Clamp(GetMana(), 0.f, GetMaxMana()));
 	}
 }
+#pragma region Vital Attributes
+void UAuraAttributeSet::OnRep_Health(const FGameplayAttributeData& OldHealth) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, Health, OldHealth);
+}
 
+void UAuraAttributeSet::OnRep_Mana(const FGameplayAttributeData& OldMana) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, Mana, OldMana);
+}
+#pragma endregion
+
+#pragma region Primary Attributes
 void UAuraAttributeSet::OnRep_Strength(const FGameplayAttributeData& OldStrength) const
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, Strength, OldStrength);
@@ -113,10 +125,39 @@ void UAuraAttributeSet::OnRep_Vigor(const FGameplayAttributeData& OldVigor) cons
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, Vigor, OldVigor);
 }
+#pragma endregion 
 
-void UAuraAttributeSet::OnRep_Health(const FGameplayAttributeData& OldHealth) const
+#pragma region Secondary Attributes
+void UAuraAttributeSet::OnRep_Armor(const FGameplayAttributeData OldArmor) const
 {
-	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, Health, OldHealth);
+}
+
+void UAuraAttributeSet::OnRep_ArmorPenetration(const FGameplayAttributeData OldArmorPenetration) const
+{
+}
+
+void UAuraAttributeSet::OnRep_BlockChance(const FGameplayAttributeData OldBlockChance) const
+{
+}
+
+void UAuraAttributeSet::OnRep_CritHitChance(const FGameplayAttributeData OldCritHitChance) const
+{
+}
+
+void UAuraAttributeSet::OnRep_CritHitDamage(const FGameplayAttributeData OldCritHitDamage) const
+{
+}
+
+void UAuraAttributeSet::OnRep_CritHitResist(const FGameplayAttributeData OldCritHitResist) const
+{
+}
+
+void UAuraAttributeSet::OnRep_HealthRegen(const FGameplayAttributeData OldHealthRegen) const
+{
+}
+
+void UAuraAttributeSet::OnRep_ManaRegen(const FGameplayAttributeData OldManaRegen) const
+{
 }
 
 void UAuraAttributeSet::OnRep_MaxHealth(const FGameplayAttributeData& OldMaxHealth) const
@@ -124,14 +165,9 @@ void UAuraAttributeSet::OnRep_MaxHealth(const FGameplayAttributeData& OldMaxHeal
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, MaxHealth, OldMaxHealth);
 }
 
-void UAuraAttributeSet::OnRep_Mana(const FGameplayAttributeData& OldMana) const
-{
-	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, Mana, OldMana);
-}
-
 void UAuraAttributeSet::OnRep_MaxMana(const FGameplayAttributeData& OldMaxMana) const
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, MaxMana, OldMaxMana);
 }
-
+#pragma endregion
 
