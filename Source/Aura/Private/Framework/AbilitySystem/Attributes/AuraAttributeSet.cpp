@@ -10,9 +10,9 @@
 
 UAuraAttributeSet::UAuraAttributeSet()
 {
-	InitHealth(50.f);
+	InitHealth(10.f);
 	InitMaxHealth(100.f);
-	InitMana(15.f);
+	InitMana(10.f);
 	InitMaxMana(50.f);
 }
 
@@ -42,6 +42,23 @@ void UAuraAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, 
 	if (Attribute == GetManaAttribute())
 	{
 		NewValue = FMath::Clamp(NewValue, 0.f, GetMaxMana());
+	}
+}
+
+void UAuraAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data)
+{
+	Super::PostGameplayEffectExecute(Data);
+
+	FEffectProperties Props;
+	SetEffectProperties(Data, Props);
+
+	if (Data.EvaluatedData.Attribute == GetHealthAttribute())
+	{
+		SetHealth(FMath::Clamp(GetHealth(), 0.f, GetMaxHealth()));
+	}
+	if (Data.EvaluatedData.Attribute == GetManaAttribute())
+	{
+		SetMana(FMath::Clamp(GetMana(), 0.f, GetMaxMana()));
 	}
 }
 
@@ -77,22 +94,7 @@ void UAuraAttributeSet::SetEffectProperties(const FGameplayEffectModCallbackData
 	}
 }
 
-void UAuraAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data)
-{
-	Super::PostGameplayEffectExecute(Data);
 
-	FEffectProperties Props;
-	SetEffectProperties(Data, Props);
-
-	if (Data.EvaluatedData.Attribute == GetHealthAttribute())
-	{
-		SetHealth(FMath::Clamp(GetHealth(), 0.f, GetMaxHealth()));
-	}
-	if (Data.EvaluatedData.Attribute == GetManaAttribute())
-	{
-		SetMana(FMath::Clamp(GetMana(), 0.f, GetMaxMana()));
-	}
-}
 #pragma region Vital Attributes
 void UAuraAttributeSet::OnRep_Health(const FGameplayAttributeData& OldHealth) const
 {
@@ -130,34 +132,42 @@ void UAuraAttributeSet::OnRep_Vigor(const FGameplayAttributeData& OldVigor) cons
 #pragma region Secondary Attributes
 void UAuraAttributeSet::OnRep_Armor(const FGameplayAttributeData OldArmor) const
 {
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, Armor, OldArmor);
 }
 
 void UAuraAttributeSet::OnRep_ArmorPenetration(const FGameplayAttributeData OldArmorPenetration) const
 {
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, ArmorPenetration, OldArmorPenetration);
 }
 
 void UAuraAttributeSet::OnRep_BlockChance(const FGameplayAttributeData OldBlockChance) const
 {
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, BlockChance, OldBlockChance);
 }
 
 void UAuraAttributeSet::OnRep_CritHitChance(const FGameplayAttributeData OldCritHitChance) const
 {
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, CritHitChance, OldCritHitChance);	
 }
 
 void UAuraAttributeSet::OnRep_CritHitDamage(const FGameplayAttributeData OldCritHitDamage) const
 {
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, CritHitDamage, OldCritHitDamage);
 }
 
 void UAuraAttributeSet::OnRep_CritHitResist(const FGameplayAttributeData OldCritHitResist) const
 {
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, CritHitResist, OldCritHitResist);
 }
 
 void UAuraAttributeSet::OnRep_HealthRegen(const FGameplayAttributeData OldHealthRegen) const
 {
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, HealthRegen, OldHealthRegen);
 }
 
 void UAuraAttributeSet::OnRep_ManaRegen(const FGameplayAttributeData OldManaRegen) const
 {
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, ManaRegen, OldManaRegen);
 }
 
 void UAuraAttributeSet::OnRep_MaxHealth(const FGameplayAttributeData& OldMaxHealth) const
