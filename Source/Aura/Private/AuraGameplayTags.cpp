@@ -17,7 +17,8 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 	FName("Attributes.Primary.Resilience"), FString("Increases Armor and Armor Penetration"));
 	GameplayTags.Attributes_Primary_Vigor = UGameplayTagsManager::Get().AddNativeGameplayTag(
 	FName("Attributes.Primary.Vigor"), FString("Increases Heath"));
-#pragma endregion 
+#pragma endregion
+	
 #pragma region Secondary Attributes 
 	GameplayTags.Attributes_Secondary_Armor = UGameplayTagsManager::Get().AddNativeGameplayTag(
 	FName("Attributes.Secondary.Armor"), FString("Reduce Damage taken improves Block Chance"));
@@ -41,7 +42,7 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 	FName("Attributes.Secondary.MaxMana"), FString("Max Mana for Player"));
 #pragma endregion
 
-#pragma region Primary Attributes 
+#pragma region Vital Attributes 
 	GameplayTags.Attributes_Vital_Health = UGameplayTagsManager::Get().AddNativeGameplayTag(
 	FName("Attributes.Vital.Health"), FString("Current Player Health"));
 	GameplayTags.Attributes_Vital_Mana = UGameplayTagsManager::Get().AddNativeGameplayTag(
