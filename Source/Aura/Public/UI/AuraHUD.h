@@ -31,7 +31,6 @@ public:
 private:
 	UPROPERTY()
 	TObjectPtr<UAuraUserWidget>  OverlayWidget;
-	
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<UAuraUserWidget> OverlayWidgetClass;
 
