@@ -20,7 +20,7 @@ void UAttributeMenuWidgetController::BroadcastInitialValues()
 
 	check(AttributeInfo);
 
-	for (TTuple<FGameplayTag, FGameplayAttribute(*)()>&Mapping Tags to Attributes Pair : AS->TagsToAttributes)
+	for (auto& Pair : AS->TagsToAttributes)
 	{
 		FAuraAttributeInfo Info = AttributeInfo->FindAttributeInfoForTag(Pair.Key);
 		Info.AttributeValue = Pair.Value().GetNumericValue(AS);
